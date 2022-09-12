@@ -89,7 +89,11 @@ public class TArbolBB<T> implements IArbolBB<T> {
 
     @Override
     public int obtenerTamanio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (esVacio()) {
+            return 0;
+        } else {
+            return this.obtenerTamanio();
+        }
     }
 
     @Override
