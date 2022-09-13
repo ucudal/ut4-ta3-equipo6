@@ -1,5 +1,3 @@
-
-
 public class TArbolBB<T> implements IArbolBB<T> {
 
     private TElementoAB<T> raiz;
@@ -18,57 +16,54 @@ public class TArbolBB<T> implements IArbolBB<T> {
      * @return
      */
     public boolean insertar(TElementoAB<T> unElemento) {
-        if (esVacio()) {
-            raiz = unElemento;
-            return true;
-        } else {
-            return raiz.insertar(unElemento);
+        if (unElemento != null) {
+            if (esVacio()) {
+                raiz = unElemento;
+                return true;
+            } else {
+                return raiz.insertar(unElemento);
+            }
         }
+        return false;
     }
 
-    /**
-     * @param unaEtiqueta
-     * @return
-     */
-    @SuppressWarnings("unchecked")
+    public boolean insertarConContador(TElementoAB<T> unElemento, int[] contador) {
+        if (unElemento != null) {
+            if (esVacio()) {
+                raiz = unElemento;
+                return true;
+            } else {
+                contador[0] = 0;
+                return raiz.insertarConContador(unElemento, contador);
+            }
+        }
+        return false;
+    }
+
+    @Override
     public TElementoAB<T> buscar(Comparable unaEtiqueta) {
+        if (this.raiz == null){
+            return null;
+        }
+        return raiz.buscar(unaEtiqueta);
+    }
+
+    public TElementoAB<T> buscarConContador(Comparable unaEtiqueta, int[] contador) {
         if (esVacio()) {
             return null;
         } else {
-            return raiz.buscar(unaEtiqueta);
+            contador[0] = 0;
+            return raiz.buscarConContador(unaEtiqueta, contador);
         }
     }
 
-    /**
-     * @return recorrida en inorden del arbol, null en caso de ser vacío
-     */
+    @Override
     public String inOrden() {
         if (esVacio()) {
             return null;
         } else {
             return raiz.inOrden();
         }
-    }
-
-    /**
-     * @return recorrida en preOrden del arbol, null en caso de ser vacío
-     */
-    /**
-     * @return
-     */
-    public boolean esVacio() {
-        return (raiz == null);
-    }
-
-    /**
-     * @return True si habían elementos en el árbol, false en caso contrario
-     */
-    public boolean vaciar() {
-        if (!esVacio()) {
-            raiz = null;
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -84,7 +79,11 @@ public class TArbolBB<T> implements IArbolBB<T> {
 
     @Override
     public int obtenerAltura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (esVacio()) {
+            return -1;
+        } else {
+            return raiz.obtenerAltura();
+        }
     }
 
     @Override
@@ -92,7 +91,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
         if (esVacio()) {
             return 0;
         } else {
-            return this.obtenerTamanio();
+            return raiz.obtenerTamanio();
         }
     }
 
@@ -106,6 +105,27 @@ public class TArbolBB<T> implements IArbolBB<T> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
+    public void eliminar(Comparable unaEtiqueta) {
+        if (raiz != null){
+            raiz = raiz.eliminar(unaEtiqueta);
+        }
+        else {
+            System.out.println("Arbol vacio");
+        }
+    }
 
+    /**
+     * @return True si habían elementos en el árbol, false en caso contrario
+     */
+    public boolean vaciar() {
+        if (!esVacio()) {
+            raiz = null;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean esVacio() {
+        return raiz == null;
+    }
 }

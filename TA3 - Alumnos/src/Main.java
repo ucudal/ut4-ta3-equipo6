@@ -1,5 +1,3 @@
-
-
 public class Main {
 
     /**
@@ -9,8 +7,8 @@ public class Main {
         TArbolBB arbol = new TArbolBB();
 
         // cargar las claves del archivo "claves.txt"
-/*
-      arbol.insertar(new TElementoAB(10, null));
+        /*
+        arbol.insertar(new TElementoAB(10, null));
         arbol.insertar(new TElementoAB(1, null));
         arbol.insertar(new TElementoAB(84, null));
         arbol.insertar(new TElementoAB(20, null));
@@ -18,9 +16,6 @@ public class Main {
         arbol.insertar(new TElementoAB(23, null));
         arbol.insertar(new TElementoAB(7, null));
         arbol.insertar(new TElementoAB(100, null));
-*/
-  
-    
+        */
     }
-
 }
